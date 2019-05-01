@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>#</td>
+			<td>Barbero</td>
+			<td>Cliente</td>
+			<td>Servicio</td>
+			<td>Fecha_Res</td>
+			<td>Obs</td>
+			<td>Acciones</td>
+	
+		</tr>
+		
+	</thead>
+	<tbody>
+        {% if reservas %}
+        {% for reserva in  reservas %}
+		<tr>
+            <td>{{ reserva.codreserva }}</td>
+            <td>{{ reserva.codbarbero }}</td>
+            <td>{{ reserva.codclie }}</td>
+            <td>{{ reserva.codserv}}</td>
+			<td>{{ reserva.fecha }}</td>
+			<td>{{ reserva.obs }}</td>
+			<td>
+				<a class ="btn btn-primary" href = "{% url 'reserva_edit' reserva.codreserva %}">Editar</a>
+			</td>
+
+			<td>
+				<a class ="btn btn-danger" href = "{% url 'reserva_delete' reserva.codreserva %}">Eliminar</a>
+			</td>
+		
+        </tr>
+        {% endfor %}
+        {% else %}
+        <h1>No Se encontraron Reservas</h1>
+        {% endif %}
+	</tbody>
+</table> 
+{% endblock%}
